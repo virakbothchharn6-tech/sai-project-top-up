@@ -24,10 +24,11 @@ Route::get('/games', [GameController::class, 'index']);
 Route::get('/games/{slug}', [GameController::class, 'show']);
 Route::get('/games/{game}/packages', [TopUpPackageController::class, 'index']);
 
-// --- Route for check id account
+// --- Route for check account (អនុញ្ញាតទាំង /check-account និង /check-player ទៅ Controller តែមួយ)
 Route::post('/check-account', [AccountCheckController::class, 'check']);
+Route::post('/check-player', [AccountCheckController::class, 'check']);
 
-// ---  Inline Closure Routes test data
+// --- Inline Closure Routes test data
 Route::get('/v1/games', function () {
     try {
         return response()->json([
