@@ -57,7 +57,7 @@ services:
       - ./frontend:/app
       - /app/node_modules
     ports:
-      - "5173:5173"
+      - "5175:5175"
     command: npm run dev -- --host
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
