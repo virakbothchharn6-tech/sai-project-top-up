@@ -5,30 +5,26 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\GameController;
 use App\Http\Controllers\Api\TopUpPackageController;
 use App\Http\Controllers\Api\AccountCheckController;
+use App\Http\Controllers\Api\OrderController;
 use App\Models\Game;
 use App\Models\TopUpPackage;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "api" middleware group. Make something great!
-|
-*/
-
-// --- Routes request data game from controller
+// --- Game data
 Route::get('/games', [GameController::class, 'index']);
 Route::get('/games/{slug}', [GameController::class, 'show']);
 Route::get('/games/{game}/packages', [TopUpPackageController::class, 'index']);
 
-// --- Route for check account (អនុញ្ញាតទាំង /check-account និង /check-player ទៅ Controller តែមួយ)
+// --- Check player account (both URLs use the same controller)
 Route::post('/check-account', [AccountCheckController::class, 'check']);
 Route::post('/check-player', [AccountCheckController::class, 'check']);
 
-// --- Inline Closure Routes test data
+// --- Orders + Bakong KHQR payment
+Route::middleware('throttle:60,1')->group(function () {
+    Route::post('/orders', [OrderController::class, 'store']);
+    Route::get('/orders/{orderCode}/status', [OrderController::class, 'status']);
+});
+
+// --- Inline closure routes (test data)
 Route::get('/v1/games', function () {
     try {
         return response()->json([
