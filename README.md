@@ -80,9 +80,7 @@ sai-top-up/
 
 ## 🔄 Order Lifecycle Flow
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/virakbothchharn6-tech/sai-project-top-up/main/docs/screenshots/architecture%20-diagram.png" width="750" alt="Order Lifecycle Flow Diagram"/>
-</p>
+
 
 
 
