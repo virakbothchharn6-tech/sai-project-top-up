@@ -8,16 +8,11 @@ A full-stack e-commerce web application for purchasing in-game top-up packages (
 
 | Dark Mode (Hero Banner) | Light Mode (Hero Banner) |
 | :---: | :---: |
-| ![Hero Dark Mode](docs/screenshots/hero-dark.png) | ![Hero Light Mode](docs/screenshots/hero-light.png) |
+| <img src="docs/screenshots/hero%20banner-dark.png" width="450" alt="Hero Dark Mode"/> | <img src="docs/screenshots/light%20banner%20.png" width="450" alt="Hero Light Mode"/> |
 
-| Package Selection & Check Name | KHQR Payment Modal |
+| KHQR Payment Modal | Telegram Bot Real-time Confirmation |
 | :---: | :---: |
-| ![Package Selection](docs/screenshots/package-selection.png) | ![KHQR Payment](docs/screenshots/khqr-modal.png) |
-
-<p align="center">
-  <b>Telegram Bot Real-time Confirmation & Polling</b><br>
-  <img src="docs/screenshots/telegram-bot.png" width="550" alt="Telegram Bot Notification"/>
-</p>
+| <img src="docs/screenshots/khqr%20-model.png" width="450" alt="KHQR Payment"/> | <img src="docs/screenshots/Telegrame-bot.png" width="380" alt="Telegram Bot Notification"/> |
 
 ---
 
