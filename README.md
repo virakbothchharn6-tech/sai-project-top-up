@@ -83,11 +83,11 @@ sai-top-up/
 ```mermaid
 sequenceDiagram
     autonumber
-    actor Customer as 👤 Customer
-    participant Frontend as 🌐 Store (Vue.js)
-    participant Backend as ⚙️ API (Laravel)
-    participant DB as 🗄️ Database
-    participant Admin as 🤖 Telegram Bot (Admin)
+    actor Customer as Customer
+    participant Frontend as  Store (Vue.js)
+    participant Backend as  API (Laravel)
+    participant DB as  Database
+    participant Admin as Telegram Bot (Admin)
 
     Customer->>Frontend: Selects Diamond Package & enters Game ID
     Frontend->>Backend: POST /api/check-player
