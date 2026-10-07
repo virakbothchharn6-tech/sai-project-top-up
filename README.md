@@ -81,7 +81,7 @@ sai-top-up/
 ## 🔄 Order Lifecycle Flow
 
 <p align="center">
-  <img src="docs/screenshots/architecture-diagram.png" width="750" alt="Order Lifecycle Flow Diagram"/>
+  <img src="docs/screenshots/architecture%20-diagram.png" width="750" alt="Order Lifecycle Flow Diagram"/>
 </p>
 
 
