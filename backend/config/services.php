@@ -35,4 +35,20 @@ return [
         ],
     ],
 
+    'bakong' => [
+        'account_id'     => env('BAKONG_ACCOUNT_ID'),
+        'account_info'   => env('BAKONG_ACCOUNT_INFO'),
+        'acquiring_bank' => env('BAKONG_ACQUIRING_BANK'),
+        'token'          => env('BAKONG_TOKEN'),
+        'base_url'       => env('BAKONG_BASE_URL', 'https://api-bakong.nbc.gov.kh'),
+        'merchant_name'  => env('BAKONG_MERCHANT_NAME', 'SAI TOP-UP'),
+        'merchant_city'  => env('BAKONG_MERCHANT_CITY', 'Phnom Penh'),
+        'currency'       => env('BAKONG_CURRENCY', 'USD'),
+    ],
+
+    'telegram' => [
+        'bot_token'     => env('TELEGRAM_BOT_TOKEN'),
+        'admin_chat_id' => env('TELEGRAM_ADMIN_CHAT_ID'),
+    ],
+
 ];
