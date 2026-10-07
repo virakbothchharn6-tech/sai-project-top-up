@@ -76,53 +76,77 @@ sai-top-up/
 ├── nginx/                      # Reverse proxy configuration
 ├── docker-compose.yml          # Container stack orchestration
 └── README.md
+```
 
+---
 
 ## 🔄 Order Lifecycle Flow
 
+<p align="center">
+  <img src="[https://raw.githubusercontent.com/virakbothchharn6-tech/sai-project-top-up/main/docs/screenshots/architecture%20-diagram.png](https://raw.githubusercontent.com/virakbothchharn6-tech/sai-project-top-up/main/docs/screenshots/architecture%20-diagram.png)" width="750" alt="Order Lifecycle Flow Diagram"/>
+</p>
 
+---
 
+## 🚀 Getting Started
 
+### Prerequisites
+- [Docker Desktop](https://www.docker.com/) & Docker Compose
+- [Git](https://git-scm.com/)
 
-🚀 Getting Started
-Prerequisites
-Docker Desktop & Docker Compose
-Git
-1. Clone the repository
-git clone [https://github.com/virakbothchharn6-tech/sai-project-top-up.git](https://github.com/virakbothchharn6-tech/sai-project-top-up.git)
+### 1. Clone the repository
+```bash
+git clone https://github.com/virakbothchharn6-tech/sai-project-top-up.git
 cd sai-project-top-up
+```
 
-2. Configure Environment Variables
+### 2. Configure Environment Variables
+```bash
 cp backend/.env.example backend/.env
-
-cp backend/.env.example backend/.env
-Ensure your backend/.env has your Telegram Bot Token and Chat ID configured:
+```
+Ensure your `backend/.env` has your Telegram Bot Token and Chat ID configured:
+```env
 TELEGRAM_BOT_TOKEN=your_bot_token_here
 TELEGRAM_CHAT_ID=your_chat_id_here
-3. Build & Run Containers
+```
+
+### 3. Build & Run Containers
+```bash
 docker compose up -d --build
-4. Setup Backend & Database
+```
+
+### 4. Setup Backend & Database
+```bash
 docker compose exec app composer install
 docker compose exec app php artisan key:generate
 docker compose exec app php artisan migrate --seed
-5. Run Telegram Polling (for order actions)
+```
+
+### 5. Run Telegram Polling (for order actions)
+```bash
 docker compose exec app php artisan telegram:poll
-6. Access the Application
-Frontend Web Store: http://localhost:5173
-Backend API: http://localhost:8000/api
-phpMyAdmin: http://localhost:8080
+```
 
-📌 Roadmap
-[x] Game Catalog & Top-Up Packages UI
-[x] Player ID / Zone ID Check Name verification
-[x] KHQR Payment modal demo
-[x] Telegram Bot integration (Order alerts & approval polling)
-[x] Mobile Legends Hero Banner with dynamic theme switching
-[ ] ABA PayWay direct gateway integration
-[ ] Admin Web Dashboard for manual order fulfillment
-[ ] User authentication & order history lookup
+### 6. Access the Application
+- **Frontend Web Store**: `http://localhost:5173`
+- **Backend API**: `http://localhost:8000/api`
+- **phpMyAdmin**: `http://localhost:8080`
 
-📄 License
+---
+
+## 📌 Roadmap
+
+- [x] Game Catalog & Top-Up Packages UI
+- [x] Player ID / Zone ID Check Name verification
+- [x] KHQR Payment modal demo
+- [x] Telegram Bot integration (Order alerts & approval polling)
+- [x] Mobile Legends Hero Banner with dynamic theme switching
+- [ ] ABA PayWay direct gateway integration
+- [ ] Admin Web Dashboard for manual order fulfillment
+- [ ] User authentication & order history lookup
+
+---
+
+## 📄 License
+
 This project is open-source and created for educational and portfolio demonstration purposes.
-
-
