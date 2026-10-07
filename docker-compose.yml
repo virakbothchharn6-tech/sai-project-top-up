@@ -33,6 +33,26 @@ services:
     depends_on:
       - db
 
+  # Telegram Bot Background Worker (ដំណើរការ telegram:poll ២៤/៧)
+  telegram_worker:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: dokokodo_telegram_worker
+    restart: always
+    working_dir: /var/www/html
+    command: php artisan telegram:poll
+    volumes:
+      - ./backend:/var/www/html
+    environment:
+      - DB_HOST=db
+      - DB_DATABASE=dokokodo_db
+      - DB_USERNAME=root
+      - DB_PASSWORD=secret
+    depends_on:
+      - app
+      - db
+
   # MySQL Database
   db:
     image: mysql:8.0
@@ -59,6 +79,8 @@ services:
     ports:
       - "5175:5175"
     command: npm run dev -- --host
+
+  # phpMyAdmin
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     container_name: dokokodo_phpmyadmin
