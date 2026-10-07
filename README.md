@@ -82,8 +82,7 @@ sai-top-up/
 
 ## 🔄 Order Lifecycle Flow
 
-![Uploading architecture-diagram.png…]()
-
+<img width="5356" height="11373" alt="architecture-diagram" src="https://github.com/user-attachments/assets/4392f0d3-0814-40e1-b730-5e2d306cf1f9" />
 
 ---
 
