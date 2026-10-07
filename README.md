@@ -80,19 +80,29 @@ sai-top-up/
 
 🔄 Order Lifecycle Flow
 
-[User selects Package] 
-       ↓ 
-[Verify Player ID] 
-       ↓ 
-[Generate Order & KHQR] 
-       ↓ 
-[User clicks 'Paid'] 
-       ↓ 
-[Telegram Bot notifies Admin] 
-       ↓ 
-[Admin clicks Confirm / Reject on Telegram] 
-       ↓ 
-[Order Status updated to Paid / Rejected]
+```mermaid
+sequenceDiagram
+    autonumber
+    actor Customer as 👤 Customer
+    participant Frontend as 🌐 Store (Vue.js)
+    participant Backend as ⚙️ API (Laravel)
+    participant DB as 🗄️ Database
+    participant Admin as 🤖 Telegram Bot (Admin)
+
+    Customer->>Frontend: Selects Diamond Package & enters Game ID
+    Frontend->>Backend: POST /api/check-player
+    Backend-->>Frontend: Player verified (Dokkodo)
+    Customer->>Frontend: Clicks Pay (KHQR)
+    Frontend->>Backend: POST /api/orders (Status: Pending)
+    Backend->>DB: Save Order Record
+    Backend-->>Frontend: Returns KHQR & Order Code
+    Customer->>Frontend: Scans KHQR & Clicks "I have paid"
+    Frontend->>Backend: POST /api/orders/{id}/claim (Status: Claimed)
+    Backend->>Admin: Send Telegram Alert with [Confirm] / [Reject]
+    Admin->>Backend: Admin clicks [Confirm] via Telegram Polling
+    Backend->>DB: Update Status to Paid
+    Backend-->>Frontend: Order marked as Paid / Completed
+```
 
 🚀 Getting Started
 Prerequisites
