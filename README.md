@@ -78,7 +78,11 @@ sai-top-up/
 └── README.md
 
 
-🔄 Order Lifecycle Flow
+## 🔄 Order Lifecycle Flow
+
+<p align="center">
+  <img src="docs/screenshots/architecture-diagram.png" width="750" alt="Order Lifecycle Flow Diagram"/>
+</p>
 
 
 
