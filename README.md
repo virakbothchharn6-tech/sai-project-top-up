@@ -1,156 +1,143 @@
 # 🎮 Sai Top-Up — Game Top-Up Store
 
-A full-stack e-commerce web application for purchasing in-game top-up packages (credits, diamonds, UC, etc.) for popular mobile and PC games. Built with a modern **Laravel + Vue.js** monorepo architecture and fully containerized with **Docker** for easy setup and deployment.
+A full-stack e-commerce web application for purchasing in-game top-up packages (credits, diamonds, UC, etc.) for popular mobile and PC games. Built with a modern **Laravel + Vue.js** monorepo architecture, integrated with **Telegram Bot API** for real-time payment confirmation, and fully containerized with **Docker** for easy setup and deployment.
+
+---
+
+## 📸 Screenshots & Demo
+
+| Dark Mode (Hero Banner) | Light Mode (Hero Banner) |
+| :---: | :---: |
+| ![Hero Dark Mode](docs/screenshots/hero-dark.png) | ![Hero Light Mode](docs/screenshots/hero-light.png) |
+
+| Package Selection & Check Name | KHQR Payment Modal |
+| :---: | :---: |
+| ![Package Selection](docs/screenshots/package-selection.png) | ![KHQR Payment](docs/screenshots/khqr-modal.png) |
+
+<p align="center">
+  <b>Telegram Bot Real-time Confirmation & Polling</b><br>
+  <img src="docs/screenshots/telegram-bot.png" width="550" alt="Telegram Bot Notification"/>
+</p>
 
 ---
 
 ## 📖 Introduction
 
-**Sai Top-Up** is a personal full-stack project that simulates a real-world game top-up store, similar to services like Codashop or Garena Shop. Users can browse a list of supported games, select a game, and top up in-game currency (diamonds, UC, credits, etc.) or purchase items such as skins.
+**Sai Top-Up** is a personal full-stack project that simulates a real-world game top-up store (similar to Codashop or Smile One). Users can browse supported games, select a top-up package, enter their Player ID & Zone ID, and verify the in-game identity via real-time **Check Name** verification before completing the purchase.
 
-For each purchase, the user enters their **Game ID** and **Zone ID**, and the system performs a **Check Name** step to verify the in-game account before proceeding to payment. Payment is currently integrated with **KHQR** as a demo, with **ABA PayWay** integration planned as the project progresses.
+The checkout flow is powered by **KHQR (Bakong)** payment demo. When a customer marks an order as paid, a **Telegram Bot** immediately notifies the administrator with inline interactive buttons (`Confirm` / `Reject`) to approve the payment directly from Telegram.
 
-This project was built and developed step by step, session by session — starting from setting up the project folder structure, through backend (Laravel) and frontend (Vue.js) development, Docker containerization, and eventually payment integration and website hosting.
-
-This project was built to practice:
-- Full-stack development (Laravel + Vue.js)
-- RESTful API design
-- Database design & seeding
-- Payment gateway integration (KHQR, and later ABA PayWay)
-- Containerized deployment workflows using Docker
-
----
-
-## 📝 Description
-
-Sai Top-Up allows users to:
-1. Browse a catalog of supported games
-2. View top-up packages (with pricing) for each selected game
-3. Enter their **Game ID** and **Zone ID**, then verify the account via **Check Name**
-4. Proceed to payment via **KHQR** (demo), with **ABA PayWay** coming soon
-5. Manage games & packages through an admin-ready backend structure
-
-The project separates concerns cleanly between the **backend (API)** and **frontend (UI)**, communicating via a RESTful API, and everything runs together using Docker Compose.
+### Key Learning Objectives:
+- Full-stack monorepo architecture (**Laravel 11 + Vue 3 / Vite**)
+- RESTful API design & clean status lifecycle management
+- External verification integration (In-game Player ID verification)
+- **Telegram Bot Webhook & Polling** for administrative order approvals
+- Responsive UI design with **Tailwind CSS** supporting both Dark/Light cyber themes
+- Containerized development workflows using **Docker & Docker Compose**
 
 ---
 
 ## ✨ Features
 
-- 🎮 Browse list of supported games
-- 💰 View top-up packages (with pricing) per game
-- 🆔 Enter Game ID & Zone ID with account **Check Name** verification
-- 💳 Payment integration with **KHQR** (demo)
-- 🔌 RESTful API built with Laravel
-- ⚡ Reactive frontend built with Vue.js
-- 🐳 Fully Dockerized (backend, frontend, database)
-- 🌱 Database seeders for sample games & packages
+- 🎮 **Game Catalog**: Browse popular supported games (Mobile Legends, Free Fire, Honor of Kings).
+- 🆔 **Account Verification**: Instant in-game **Check Name** lookup for Game ID & Server ID.
+- 💎 **Interactive Package Selection**: Clean denomination selector showing packages, passes, and prices.
+- 💳 **KHQR Payment Modal**: Dynamic KHQR code generation with countdown timer and order code.
+- 🤖 **Telegram Order Integration**: Automated notification sent to Telegram channel/group when a customer claims payment.
+- ⚡ **Admin Telegram Polling**: Custom Artisan CLI command (`telegram:poll`) to handle `Confirm` / `Reject` callbacks in real-time.
+- 🌓 **Theme Switcher**: Fully responsive UI supporting customizable dark and light cyberpunk aesthetics.
+- 🐳 **Dockerized Setup**: Monorepo orchestration with Docker Compose (Nginx, PHP-FPM, MySQL, phpMyAdmin).
 
 ---
 
 ## 🛠️ Tech Stack
 
-| Layer    | Technology              |
-|----------|---------------------------|
-| Backend  | Laravel (PHP)            |
-| Frontend | Vue.js + Vite             |
-| Database | MySQL / SQLite            |
-| DevOps   | Docker & Docker Compose   |
+| Layer | Technology |
+|---|---|
+| **Backend** | Laravel 11 (PHP 8.2+) |
+| **Frontend** | Vue 3, Vite, Tailwind CSS, Pinia |
+| **Database** | MySQL / phpMyAdmin |
+| **Integrations** | Telegram Bot API, KHQR (Bakong Demo) |
+| **DevOps** | Docker, Docker Compose, Nginx |
 
 ---
 
 ## 📂 Project Structure
 
-```
+```text
 sai-top-up/
-├── backend/          # Laravel API
-├── frontend/          # Vue.js application
-├── nginx/             # Web server configuration
-├── docker-compose.yml
+├── backend/
+│   ├── app/
+│   │   ├── Console/Commands/   # Telegram polling commands (TelegramPoll.php)
+│   │   ├── Http/Controllers/   # OrderController & API endpoints
+│   │   ├── Models/             # Order and Game models
+│   │   └── Services/           # Telegram notification service
+│   ├── database/migrations/    # Orders and Game schema migrations
+│   └── routes/api.php          # API routes
+├── frontend/
+│   ├── public/                 # Media assets (MLBB videos & hero renders)
+│   └── src/views/Home.vue      # Main interactive store view
+├── docs/screenshots/           # Readme preview images
+├── nginx/                      # Reverse proxy configuration
+├── docker-compose.yml          # Container stack orchestration
 └── README.md
-```
 
----
 
-## 🚀 Getting Started (Step by Step)
+🔄 Order Lifecycle Flow
 
-### Prerequisites
-Make sure you have the following installed:
-- [Docker](https://www.docker.com/) & Docker Compose
-- [Git](https://git-scm.com/)
+[User selects Package] 
+       ↓ 
+[Verify Player ID] 
+       ↓ 
+[Generate Order & KHQR] 
+       ↓ 
+[User clicks 'Paid'] 
+       ↓ 
+[Telegram Bot notifies Admin] 
+       ↓ 
+[Admin clicks Confirm / Reject on Telegram] 
+       ↓ 
+[Order Status updated to Paid / Rejected]
 
-### Step 1 — Clone the repository
-```bash
-git clone https://github.com/virakbothchharn6-tech/sai-project-top-up.git
+🚀 Getting Started
+Prerequisites
+Docker Desktop & Docker Compose
+Git
+1. Clone the repository
+git clone [https://github.com/virakbothchharn6-tech/sai-project-top-up.git](https://github.com/virakbothchharn6-tech/sai-project-top-up.git)
 cd sai-project-top-up
-```
 
-### Step 2 — Set up environment variables
-Copy the example environment file for the backend:
-```bash
+2. Configure Environment Variables
 cp backend/.env.example backend/.env
-```
-Copy the example environment file for the frontend:
-```bash
-cp frontend/vite.config.js.example frontend/vite.config.js
-```
 
-### Step 3 — Build and run with Docker
-```bash
-docker-compose up -d --build
-```
+cp backend/.env.example backend/.env
+Ensure your backend/.env has your Telegram Bot Token and Chat ID configured:
+TELEGRAM_BOT_TOKEN=your_bot_token_here
+TELEGRAM_CHAT_ID=your_chat_id_here
+3. Build & Run Containers
+docker compose up -d --build
+4. Setup Backend & Database
+docker compose exec app composer install
+docker compose exec app php artisan key:generate
+docker compose exec app php artisan migrate --seed
+5. Run Telegram Polling (for order actions)
+docker compose exec app php artisan telegram:poll
+6. Access the Application
+Frontend Web Store: http://localhost:5173
+Backend API: http://localhost:8000/api
+phpMyAdmin: http://localhost:8080
 
-### Step 4 — Install backend dependencies
-```bash
-docker-compose exec backend composer install
-```
+📌 Roadmap
+[x] Game Catalog & Top-Up Packages UI
+[x] Player ID / Zone ID Check Name verification
+[x] KHQR Payment modal demo
+[x] Telegram Bot integration (Order alerts & approval polling)
+[x] Mobile Legends Hero Banner with dynamic theme switching
+[ ] ABA PayWay direct gateway integration
+[ ] Admin Web Dashboard for manual order fulfillment
+[ ] User authentication & order history lookup
 
-### Step 5 — Generate app key
-```bash
-docker-compose exec backend php artisan key:generate
-```
+📄 License
+This project is open-source and created for educational and portfolio demonstration purposes.
 
-### Step 6 — Run database migrations & seeders
-```bash
-docker-compose exec backend php artisan migrate --seed
-```
 
-### Step 7 — Install frontend dependencies
-```bash
-docker-compose exec frontend npm install
-```
-
-### Step 8 — Access the application
-- Frontend: `http://localhost:5173` (or your configured port)
-- Backend API: `http://localhost:8000/api`
-
----
-
-## 🗄️ Database Seeders
-
-The project includes seeders for:
-- `GameSeeder` — sample games
-- `TopUpPackageSeeder` — sample top-up packages per game
-
-Run seeders anytime with:
-```bash
-docker-compose exec backend php artisan db:seed
-```
-
----
-
-## 📌 Roadmap
-
-- [x] Browse games & top-up packages
-- [x] Game ID / Zone ID input with Check Name verification
-- [x] KHQR payment integration (demo)
-- [ ] ABA PayWay payment integration
-- [ ] User authentication
-- [ ] Admin dashboard for managing games/packages
-- [ ] Order history
-- [ ] Website hosting / production deployment
-
----
-
-## 📄 License
-
-This project is for personal/educational purposes.
