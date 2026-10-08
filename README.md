@@ -89,9 +89,11 @@ sai-project-top-up/
 
 --
 
+
+
 ## 🔄 Order Lifecycle Flow
 
-
+![Order Lifecycle Flow](docs/screenshots/architecture-diagram.png)
 ---
 
 ## 🚀 Getting Started
