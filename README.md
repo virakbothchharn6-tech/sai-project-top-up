@@ -1,13 +1,12 @@
 # 🎮 Sai Top-Up — Game Top-Up Store
 
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-sai--top.com-brightgreen?style=for-the-badge&logo=googlechrome&logoColor=white)](https://sai-top.com)
-[![Docker](https://img.shields.io/badge/Docker-Containerized-blue?style=for-the-badge&logo=docker&logoColor=white)](https://sai-top.com)
-[![SSL](https://img.shields.io/badge/SSL-Let's%20Encrypt-success?style=for-the-badge&logo=letsencrypt&logoColor=white)](https://sai-top.com)
+[![Docker](https://img.shields.io/badge/Docker-Containerized-blue?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
 [![Laravel](https://img.shields.io/badge/Laravel-11-red?style=for-the-badge&logo=laravel&logoColor=white)](https://laravel.com)
 [![Vue](https://img.shields.io/badge/Vue.js-3-emerald?style=for-the-badge&logo=vuedotjs&logoColor=white)](https://vuejs.org)
+[![Nginx](https://img.shields.io/badge/Nginx-Reverse%20Proxy-009639?style=for-the-badge&logo=nginx&logoColor=white)](https://nginx.org)
+[![MySQL](https://img.shields.io/badge/MySQL-8.0-4479A1?style=for-the-badge&logo=mysql&logoColor=white)](https://www.mysql.com/)
 
-> 🌐 **Production Website:** [https://sai-top.com](https://sai-top.com)  
-> Full-stack e-commerce web application for purchasing in-game top-up packages (credits, diamonds, UC, etc.) for popular mobile and PC games. Built with a modern **Laravel + Vue.js** monorepo architecture, integrated with **Telegram Bot API** for real-time payment confirmation, and fully containerized with **Docker** on Ubuntu VPS with custom domain and Let's Encrypt SSL.
+> Full-stack e-commerce web application for purchasing in-game top-up packages (credits, diamonds, UC, etc.) for popular mobile and PC games. Built with a modern **Laravel + Vue.js** monorepo architecture, integrated with **Telegram Bot API** for real-time payment confirmation, and fully containerized with **Docker & Docker Compose**.
 
 ---
 
@@ -31,8 +30,8 @@ The checkout flow features **ACLEDA KHQR** payment integration. When an order is
 
 ### Key Highlights & Architecture:
 - **Full-Stack Monorepo:** Laravel 11 (PHP 8.2+) RESTful backend with Vue 3 / Vite frontend.
-- **Production Deployment:** Hosted on Ubuntu 20.04 VPS with custom domain (`sai-top.com`) and automated Let's Encrypt SSL (HTTPS).
-- **Reverse Proxy & Routing:** Custom Nginx reverse proxy serving both frontend routes and backend `/api/` endpoints.
+- **Dockerized Infrastructure:** Multi-container setup managed via Docker Compose (Nginx reverse proxy, PHP-FPM, MySQL, and background worker).
+- **Reverse Proxy & Routing:** Custom Nginx reverse proxy serving both frontend routes and backend `/api/` endpoints cleanly.
 - **In-Game Verification:** Real-time mobile ID verification endpoints.
 - **Telegram Polling Worker:** Background artisan worker (`telegram:poll`) running in Docker to handle real-time admin webhook callbacks.
 - **Modern UI:** Tailwind CSS dark/light theme switching with responsive mobile layout.
@@ -56,7 +55,7 @@ The checkout flow features **ACLEDA KHQR** payment integration. When an order is
 
 | Layer | Technology |
 |---|---|
-| **Live Production** | [https://sai-top.com](https://sai-top.com) (Ubuntu 20.04 VPS / Let's Encrypt SSL) |
+| **Architecture** | Containerized Monorepo (Docker Compose) |
 | **Backend** | Laravel 11 (PHP 8.2+) |
 | **Frontend** | Vue 3, Vite, Tailwind CSS, Pinia |
 | **Database** | MySQL 8.0 / phpMyAdmin |
@@ -80,21 +79,18 @@ sai-project-top-up/
 ├── frontend/
 │   ├── public/                 # Media assets (MLBB videos & hero renders)
 │   ├── src/views/Home.vue      # Main interactive store view
-│   └── vite.config.js          # Vite config with allowedHosts for production
+│   └── vite.config.js          # Vite configuration
 ├── docs/screenshots/           # Readme preview images
 ├── nginx/
-│   └── default.conf            # Nginx SSL reverse proxy configuration
+│   └── default.conf            # Nginx reverse proxy configuration
 ├── docker-compose.yml          # Container stack orchestration
 └── README.md
 
---
 
 
+#
 
-## 🔄 Order Lifecycle Flow
 
-![Order Lifecycle Flow](docs/screenshots/architecture-diagram.png)
----
 
 ## 🚀 Getting Started
 
@@ -115,7 +111,6 @@ cp backend/.env.example backend/.env
 Ensure your `backend/.env` has your Telegram Bot Token and Chat ID configured:
 ```env
 Code snippet
-APP_URL=[https://sai-top.com](https://sai-top.com)
 TELEGRAM_BOT_TOKEN=your_bot_token_here
 TELEGRAM_CHAT_ID=your_chat_id_here
 
@@ -137,7 +132,6 @@ docker compose exec app php artisan telegram:poll
 ```
 
 ### 6. Access the Application
-- **LiveProduct**: `https://sai-top.com/`
 - **Local Web Store**:http://localhost:5175
 - **Backend API**: `https://sai-top.com/api (Local: http://localhost:8000/api)`
 - **phpMyAdmin**: `http://localhost:8080`
